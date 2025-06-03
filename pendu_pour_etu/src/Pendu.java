@@ -83,14 +83,12 @@ public class Pendu extends Application {
      */
     @Override
     public void init() {
-
-        this.clavier = new Clavier("ABCDEFGHIJKLMNOPQRSTUVWXYZ-", new ControleurLettres(new MotMystere(STYLESHEET_CASPIAN, 0, 0), this), 5); 
         this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("./img");
         // A implementrrr
-        //this.panelCentral = this.fenetreAccueil();
-        this.panelCentral = this.fenetreJeu();
+        this.panelCentral = this.fenetreAccueil();
+        //this.panelCentral = this.fenetreJeu();
 
 
     }
@@ -158,6 +156,9 @@ public class Pendu extends Application {
       *         de progression et le clavier
       */
      private BorderPane fenetreJeu(){
+        ControleurLettres controleurMot = new ControleurLettres(this.modelePendu, this);
+        this.clavier = new Clavier("ABCDEFGHIJKLMNOPQRSTUVWXYZ-", controleurMot, 5); 
+
         // A implementer
         BorderPane pane = new BorderPane();
         this.motCrypte = new Text(this.modelePendu.getMotCrypte());
@@ -169,8 +170,7 @@ public class Pendu extends Application {
         VBox vBoxCentre = new VBox();
         VBox vBoxDroite = new VBox();
 
-        motCrypte.setStyle("-fx-justify-content: center;");
-
+        this.motCrypte.setStyle("-fx-justify-content: center;");
         vBoxCentre.getChildren().addAll(motCrypte, pendu0, this.pg, this.clavier);
         vBoxDroite.getChildren().addAll(difficulte);
 
@@ -178,6 +178,9 @@ public class Pendu extends Application {
         pane.setRight(vBoxDroite);
         //setCenter
         //setRight
+    System.out.println(this.motCrypte);
+    System.out.println(this.modelePendu);
+    System.out.println(this.modelePendu.getMotATrouve());
         return pane;
      }
 
@@ -250,7 +253,7 @@ public class Pendu extends Application {
      * raffraichit l'affichage selon les données du modèle
      */
     public void majAffichage(){
-//        this.motCrypte = this.modelePendu.getMotCrypte();
+        this.motCrypte.setText(this.modelePendu.getMotCrypte());
         // A implementer
     }
 
@@ -290,6 +293,7 @@ public class Pendu extends Application {
     public Clavier getClavier(){
         return this.clavier;
     }
+
     /**
      * créer le graphe de scène et lance le jeu
      * @param stage la fenêtre principale

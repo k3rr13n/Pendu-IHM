@@ -1,5 +1,5 @@
- [] Mettre en place le projet (projet VSCode + dépot git)
- [] Coder la classe ControleurLettres
+ [x] Mettre en place le projet (projet VSCode + dépot git)
+ [x] Coder la classe ControleurLettres
  [] Coder la classe ControleurParametres
  [] Coder la classe ControleurLancerPartie
  [] Coder la classe ControleurNiveau
@@ -19,7 +19,7 @@
  []    Coder la méthode modeJeu() de Pendu
  []    Coder la méthode titre() de Pendu
  []    Coder la méthode leChrono() de Pendu
- []    Coder la méthode majAffichage() de Pendu
+ [x]    Coder la méthode majAffichage() de Pendu
  []    Coder la méthode getChrono() de Pendu
  []    Coder la méthode popUpReglesDuJeu() de Pendu
  []    Coder la méthode popUpMessageGagne() de Pendu
@@ -31,6 +31,6 @@
  [] Griser le bouton "Home" sur la page d’acceuil
  [] Griser le bouton "Parametres" sur la page de jeu
  [] Refactoriser le code
- [] Faire en sorte que les lettres déjà proposées par l’utilisateur soient désactivées
+ [x] Faire en sorte que les lettres déjà proposées par l’utilisateur soient désactivées
  [] Gérer la fin de partie (gagné ou perdue)
  [] Ajouter la possibilité de jouer à un autre jeu : le démineur

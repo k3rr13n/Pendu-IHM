@@ -41,10 +41,14 @@ public class ControleurLettres implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         Button button = (Button) (actionEvent.getSource());
         String lettreATrouver = button.getText();
-        String mot = this.modelePendu.getMotCrypte();
+        String mot = this.modelePendu.getMotATrouve();
+
+    System.out.println(mot);
+
         for (char lettre : mot.toCharArray()){
             if (("" + lettre).equals(lettreATrouver)){
-
+                this.modelePendu.essaiLettre(lettre);
+                this.vuePendu.majAffichage();
             }
         this.ensemble.add(lettreATrouver);
         this.vuePendu.getClavier().desactiveTouches(ensemble);
