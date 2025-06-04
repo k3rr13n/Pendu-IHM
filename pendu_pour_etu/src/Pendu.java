@@ -83,8 +83,8 @@ public class Pendu extends Application {
      */
     @Override
     public void init() {
-        //this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
-        this.modelePendu = new MotMystere("CAMEMBERT", 3, 10);  
+        this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
+        //this.modelePendu = new MotMystere("CAMEMBERT", 3, 10);  
         this.erreursRestantes = this.modelePendu.getNbErreursMax();      
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("./img");
