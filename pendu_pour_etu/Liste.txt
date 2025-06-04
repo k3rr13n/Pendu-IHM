@@ -1,23 +1,23 @@
  [x] Mettre en place le projet (projet VSCode + dépot git)
  [x] Coder la classe ControleurLettres
  [] Coder la classe ControleurParametres
- [] Coder la classe ControleurLancerPartie
+ [~] Coder la classe ControleurLancerPartie
  [] Coder la classe ControleurNiveau
  [] Coder la classe ControleurChronometre
  [] Coder la classe ControleurInfos
- [] Coder la classe Clavier
- []    Coder le constructeur de Clavier
- []    Coder la méthode desactiveTouches() de Clavier
+ [x] Coder la classe Clavier
+ [x]    Coder le constructeur de Clavier
+ [x]    Coder la méthode desactiveTouches() de Clavier
  [] Coder la classe Chronometre
  [] Coder la classe Pendu
  [x]    Afficher la page d’accueil
  []    Afficher la page de jeu
  []    La barre de progression doit indiquer l’avancement du jeu
- []    Coder la méthode init() de Pendu
- []    Coder la méthode titre() de Pendu
- []    Coder la méthode modeAccueil() de Pendu
- []    Coder la méthode modeJeu() de Pendu
- []    Coder la méthode titre() de Pendu
+ [~]    Coder la méthode init() de Pendu
+ [x]    Coder la méthode titre() de Pendu
+ [']    Coder la méthode modeAccueil() de Pendu
+ [']    Coder la méthode modeJeu() de Pendu
+ [x]    Coder la méthode titre() de Pendu
  []    Coder la méthode leChrono() de Pendu
  [x]    Coder la méthode majAffichage() de Pendu
  []    Coder la méthode getChrono() de Pendu

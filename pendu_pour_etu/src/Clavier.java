@@ -38,10 +38,6 @@ public class Clavier extends TilePane{
             btns.setOnAction(actionTouches);
             this.getChildren().add(btns);
         }
-
-        //System.out.println(clavier);
-
-        // A implémenter
     }
 
     /**

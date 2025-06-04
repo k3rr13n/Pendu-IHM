@@ -42,18 +42,27 @@ public class ControleurLettres implements EventHandler<ActionEvent> {
         Button button = (Button) (actionEvent.getSource());
         String lettreATrouver = button.getText();
         String mot = this.modelePendu.getMotATrouve();
+        Boolean dansLeMot = false;
 
     System.out.println(mot);
 
         for (char lettre : mot.toCharArray()){
             if (("" + lettre).equals(lettreATrouver)){
                 this.modelePendu.essaiLettre(lettre);
+                System.out.println("oui");
+                dansLeMot = true;
                 this.vuePendu.majAffichage();
             }
         this.ensemble.add(lettreATrouver);
         this.vuePendu.getClavier().desactiveTouches(ensemble);
         // A implémenter
         //verifier si la partie est finie
+        }
+        if (dansLeMot == false){
+            System.out.println("non");
+            this.vuePendu.majAffichage();
+            for (char lettre : lettreATrouver.toCharArray())
+                this.modelePendu.essaiLettre(lettre);
         }
     }
 }

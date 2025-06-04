@@ -74,20 +74,23 @@ public class Pendu extends Application {
      */    
     private Button boutonMaison;
     /**
-     * le bouton qui permet de (lancer ou relancer une partie
+     * le bouton qui permet de (lancer ou relancer une partie)
      */ 
     private Button bJouer;
-
+    private int erreursRestantes;
     /**
      * initialise les attributs (créer le modèle, charge les images, crée le chrono ...)
      */
     @Override
     public void init() {
-        this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
+        //this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
+        this.modelePendu = new MotMystere("CAMEMBERT", 3, 10);  
+        this.erreursRestantes = this.modelePendu.getNbErreursMax();      
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("./img");
         // A implementrrr
-        this.panelCentral = this.fenetreAccueil();
+        this.panelCentral = new BorderPane();
+        this.panelCentral.setCenter(this.fenetreAccueil());
         //this.panelCentral = this.fenetreJeu();
 
 
@@ -164,14 +167,14 @@ public class Pendu extends Application {
         this.motCrypte = new Text(this.modelePendu.getMotCrypte());
         //Label motATrouver = new Label(this.modelePendu.getMotCrypte());
         Label difficulte = new Label("????");
-        ImageView pendu0 = new ImageView(new Image("file:./pendu_pour_etu/img/pendu0.png"));
+        this.dessin = new ImageView(new Image("file:./pendu_pour_etu/img/pendu0.png"));
         this.pg= new ProgressBar();
         //this.clavier = new Clavier("ABCDEFGHIJKLMNOPQRSTUVWXYZ-", new ControleurLettres(modelePendu, this), 5); 
         VBox vBoxCentre = new VBox();
         VBox vBoxDroite = new VBox();
 
-        this.motCrypte.setStyle("-fx-justify-content: center;");
-        vBoxCentre.getChildren().addAll(motCrypte, pendu0, this.pg, this.clavier);
+        //this.motCrypte.setStyle("-fx-text-align: center;");
+        vBoxCentre.getChildren().addAll(motCrypte, this.dessin, this.pg, this.clavier);
         vBoxDroite.getChildren().addAll(difficulte);
 
         pane.setCenter(vBoxCentre);
@@ -232,11 +235,11 @@ public class Pendu extends Application {
     }
 
     public void modeAccueil(){
-        // A implementer
+        this.panelCentral.setCenter(fenetreAccueil());
     }
     
     public void modeJeu(){
-        // A implementer
+        this.panelCentral.setCenter(this.fenetreJeu());
     }
     
     public void modeParametres(){
@@ -245,7 +248,6 @@ public class Pendu extends Application {
 
     /** lance une partie */
     public void lancePartie(){
-        this.panelCentral = this.fenetreJeu();
         // A implementer
     }
 
@@ -254,6 +256,18 @@ public class Pendu extends Application {
      */
     public void majAffichage(){
         this.motCrypte.setText(this.modelePendu.getMotCrypte());
+        System.out.println(this.modelePendu.getNbErreursRestants());
+        if (this.modelePendu.getNbErreursMax() != this.modelePendu.getNbErreursRestants()){
+            this.erreursRestantes = this.modelePendu.getNbErreursRestants();
+            chargerImages("file:./pendu_pour_etu/img");
+        }
+        /*if (this.modelePendu.getNbErreursRestants() != this.erreursRestantes){
+            this.erreursRestantes--;
+            System.out.println("farfadet");
+            int imgVal = this.modelePendu.getNbEssais();
+            //ImageView lImage = new ImageView(new Image("file:./pendu_pour_etu/img/pendu"+imgVal+".png"));
+            this.dessin.setImage(new Image("file:./pendu_pour_etu/img/pendu"+imgVal+".png"));
+        }*/
         // A implementer
     }
 
