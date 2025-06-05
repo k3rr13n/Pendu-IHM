@@ -1,9 +1,12 @@
 import java.util.HashSet;
+import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+
 import java.util.Set;
 
 /**
@@ -42,27 +45,35 @@ public class ControleurLettres implements EventHandler<ActionEvent> {
         Button button = (Button) (actionEvent.getSource());
         String lettreATrouver = button.getText();
         String mot = this.modelePendu.getMotATrouve();
-        Boolean dansLeMot = false;
+        char lettre = lettreATrouver.charAt(0);
 
-    System.out.println(mot);
+        System.out.println(mot);
 
-        for (char lettre : mot.toCharArray()){
-            if (("" + lettre).equals(lettreATrouver)){
-                this.modelePendu.essaiLettre(lettre);
-                System.out.println("oui");
-                dansLeMot = true;
-                this.vuePendu.majAffichage();
-            }
+        this.modelePendu.essaiLettre(lettre);
+        this.vuePendu.majAffichage();
         this.ensemble.add(lettreATrouver);
         this.vuePendu.getClavier().desactiveTouches(ensemble);
-        // A implémenter
-        //verifier si la partie est finie
+        System.out.println("Il reste "+this.modelePendu.getNbErreursRestants()+" erreurs");
+        System.out.println("Il manque "+this.modelePendu.getNbLettresRestantes()+" lettres");
+
+        if (this.modelePendu.perdu()){
+            Optional<ButtonType> reponseL = this.vuePendu.popUpMessagePerdu().showAndWait();
+                if (reponseL.isPresent() && reponseL.get().equals(ButtonType.CLOSE)){
+                    this.vuePendu.modeAccueil();
+                }
+                else{
+                    this.vuePendu.lancePartie();
+                }
         }
-        if (dansLeMot == false){
-            System.out.println("non");
-            this.vuePendu.majAffichage();
-            for (char lettre : lettreATrouver.toCharArray())
-                this.modelePendu.essaiLettre(lettre);
-        }
+
+        if (this.modelePendu.gagne()){
+            Optional<ButtonType> reponseW = this.vuePendu.popUpMessageGagne().showAndWait();
+                if (reponseW.isPresent() && reponseW.get().equals(ButtonType.CLOSE)){
+                    this.vuePendu.modeAccueil();
+                }
+                else{
+                    this.vuePendu.lancePartie();
+                }
+        }    
     }
 }
