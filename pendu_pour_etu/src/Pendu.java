@@ -83,7 +83,7 @@ public class Pendu extends Application {
     @Override
     public void init() {
         this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
-        //this.modelePendu = new MotMystere("CAMEMBERT", 3, 10);  
+        //this.modelePendu = new MotMystere("CAMEMBERT", 0, 10);  
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("./img");
         this.panelCentral = new BorderPane();
@@ -184,14 +184,19 @@ public class Pendu extends Application {
         VBox niveauDiff = new VBox();
         ToggleGroup group2 = new ToggleGroup();
 
+        ControleurNiveau controleurDiff = new ControleurNiveau(modelePendu);
         RadioButton facile = new RadioButton("Facile");
         facile.setToggleGroup(group2);
+        facile.setOnAction(controleurDiff);
         RadioButton medium = new RadioButton("Medium");
         medium.setToggleGroup(group2);
+        medium.setOnAction(controleurDiff);
         RadioButton difficile = new RadioButton("Difficile");
         difficile.setToggleGroup(group2);
+        difficile.setOnAction(controleurDiff);
         RadioButton expert = new RadioButton("Expert");
         expert.setToggleGroup(group2);
+        expert.setOnAction(controleurDiff);
         niveauDiff.getChildren().addAll(facile, medium, difficile, expert);
         TitledPane difficultee = new TitledPane("Difficultée", niveauDiff);
 
@@ -233,9 +238,8 @@ public class Pendu extends Application {
     public void lancePartie(){
         modeJeu();
         this.modelePendu.setMotATrouver();
-        System.out.println(this.modelePendu.getMotATrouve());
         this.majAffichage();
-        //majAffichage();
+        System.out.println(this.modelePendu.getNiveau());
     }
 
     /**
@@ -244,6 +248,7 @@ public class Pendu extends Application {
      */
     public void majAffichage(){
         this.motCrypte.setText(this.modelePendu.getMotCrypte());
+        this.dessin.setImage(new Image("file:./pendu_pour_etu/img/pendu"+(10-this.modelePendu.getNbErreursRestants()+".png")));
     }
 
     /**
@@ -268,14 +273,12 @@ public class Pendu extends Application {
     }
     
     public Alert popUpMessageGagne(){
-        // A implementer
         Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez gagné!\nFélicitation...", ButtonType.CLOSE, ButtonType.NEXT);
         alert.setTitle("GG");       
         return alert;
     }
     
     public Alert popUpMessagePerdu(){
-        // A implementer    
         Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez perdu!\nDommage...", ButtonType.CLOSE, ButtonType.NEXT);
         alert.setTitle("Perdu");
         return alert;
