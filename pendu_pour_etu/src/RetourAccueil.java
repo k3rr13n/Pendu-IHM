@@ -22,8 +22,7 @@ public class RetourAccueil implements EventHandler<ActionEvent> {
      */
     public RetourAccueil(MotMystere modelePendu, Pendu vuePendu) {
         this.modelePendu = modelePendu;
-        this.modelePendu = modelePendu;
-        // A implémenter
+        this.vuePendu = vuePendu;
     }
 
 

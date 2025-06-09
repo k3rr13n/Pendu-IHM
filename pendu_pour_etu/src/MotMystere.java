@@ -153,6 +153,7 @@ public class MotMystere {
      */
     public void setMotATrouver() {
         this.initMotMystere(this.dict.choisirMot(), this.niveau, this.nbEerreursMax);
+        //this.initMotMystere("CAMEMBERT", this.niveau, this.nbEerreursMax);  // Test pour mon ordinateur personnel
     }
 
     /**

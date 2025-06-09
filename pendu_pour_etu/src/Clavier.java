@@ -39,6 +39,7 @@ public class Clavier extends TilePane{
             this.getChildren().add(btns);
         }
     }
+    // Le nombre de touches par lignes n'a pas été implémenté
 
     /**
      * permet de désactiver certaines touches du clavier (et active les autres)
@@ -54,6 +55,5 @@ public class Clavier extends TilePane{
                     btn.setDisable(false);
             }
         }
-        // A changer eventuellement
     }
 }

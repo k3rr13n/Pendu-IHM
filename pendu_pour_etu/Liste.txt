@@ -1,8 +1,8 @@
  [x] Mettre en place le projet (projet VSCode + dépot git)
  [x] Coder la classe ControleurLettres
  [] Coder la classe ControleurParametres
- [~] Coder la classe ControleurLancerPartie
- [] Coder la classe ControleurNiveau
+ [x] Coder la classe ControleurLancerPartie
+ [x] Coder la classe ControleurNiveau
  [] Coder la classe ControleurChronometre
  [] Coder la classe ControleurInfos
  [x] Coder la classe Clavier
@@ -11,19 +11,19 @@
  [] Coder la classe Chronometre
  [] Coder la classe Pendu
  [x]    Afficher la page d’accueil
- []    Afficher la page de jeu
- []    La barre de progression doit indiquer l’avancement du jeu
- [~]    Coder la méthode init() de Pendu
+ [x]    Afficher la page de jeu
+ [x]    La barre de progression doit indiquer l’avancement du jeu
+ [x]    Coder la méthode init() de Pendu
  [x]    Coder la méthode titre() de Pendu
- [']    Coder la méthode modeAccueil() de Pendu
- [']    Coder la méthode modeJeu() de Pendu
+ [x]    Coder la méthode modeAccueil() de Pendu
+ [x]    Coder la méthode modeJeu() de Pendu
  [x]    Coder la méthode titre() de Pendu
- []    Coder la méthode leChrono() de Pendu
+ [x]    Coder la méthode leChrono() de Pendu
  [x]    Coder la méthode majAffichage() de Pendu
- []    Coder la méthode getChrono() de Pendu
- []    Coder la méthode popUpReglesDuJeu() de Pendu
- []    Coder la méthode popUpMessageGagne() de Pendu
- []    Coder la méthode popUpMessagePerdu() de Pendu
+ [x]    Coder la méthode getChrono() de Pendu
+ [x]    Coder la méthode popUpReglesDuJeu() de Pendu
+ [x]    Coder la méthode popUpMessageGagne() de Pendu
+ [x]    Coder la méthode popUpMessagePerdu() de Pendu
  []    Coder la méthode modeParametres() de Pendu
  [] Rendre tous les boutons fonctionnels
  [] Rendre le chronomètre
@@ -32,5 +32,5 @@
  [] Griser le bouton "Parametres" sur la page de jeu
  [] Refactoriser le code
  [x] Faire en sorte que les lettres déjà proposées par l’utilisateur soient désactivées
- [] Gérer la fin de partie (gagné ou perdue)
+ [x] Gérer la fin de partie (gagné ou perdue)
  [] Ajouter la possibilité de jouer à un autre jeu : le démineur

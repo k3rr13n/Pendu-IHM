@@ -14,6 +14,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.control.ButtonBar.ButtonData ;
 
 import java.util.List;
+
+import javax.swing.plaf.synth.SynthUI;
+
 import java.util.Arrays;
 import java.io.File;
 import java.util.ArrayList;
@@ -83,7 +86,7 @@ public class Pendu extends Application {
     @Override
     public void init() {
         this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
-        //this.modelePendu = new MotMystere("CAMEMBERT", 0, 10);  
+        //this.modelePendu = new MotMystere("CAMEMBERT", 0, 10);  // Test pour mon ordinateur personnel
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("./img");
         this.panelCentral = new BorderPane();
@@ -141,8 +144,8 @@ public class Pendu extends Application {
       * @return le panel du chronomètre
       */
      private TitledPane leChrono(){
-        // A implementer
-        TitledPane res = new TitledPane();
+        this.chrono = new Chronometre();
+        TitledPane res = new TitledPane("Chronomètre", this.chrono);
         return res;
      }
 
@@ -156,20 +159,35 @@ public class Pendu extends Application {
 
         BorderPane pane = new BorderPane();
         this.motCrypte = new Text(this.modelePendu.getMotCrypte());
-        Label difficulte = new Label("????");
         this.dessin = new ImageView(new Image("file:./pendu_pour_etu/img/pendu0.png"));
-        this.pg = new ProgressBar();
+        this.pg = new ProgressBar(0);
         VBox vBoxCentre = new VBox();
         VBox vBoxDroite = new VBox();
 
-        vBoxCentre.getChildren().addAll(motCrypte, this.dessin, this.pg, this.clavier);
-        vBoxDroite.getChildren().addAll(difficulte);
+        String textDiff = "";
+        if (this.modelePendu.getNiveau() == 0)
+            textDiff = "Niveau Facile";
+        if (this.modelePendu.getNiveau() == 1)
+            textDiff = "Niveau Medium";
+        if (this.modelePendu.getNiveau() == 2)
+            textDiff = "Niveau Difficile";
+        if (this.modelePendu.getNiveau() == 3)
+            textDiff = "Niveau Expert";
+        this.leNiveau = new Text(textDiff);
+
+        vBoxCentre.getChildren().addAll(this.motCrypte, this.dessin, this.pg, this.clavier);
+        vBoxCentre.setAlignment(Pos.BASELINE_CENTER);
+        vBoxDroite.getChildren().addAll(this.leNiveau, this.leChrono(), this.bJouer);
 
         pane.setCenter(vBoxCentre);
         pane.setRight(vBoxDroite);
+        vBoxCentre.setPadding(new Insets(50, 0, 0, 0));
+        vBoxCentre.setSpacing(20);
+        vBoxDroite.setPadding(new Insets(40, 50, 0, 0)); //top, right, bottom, left
+        vBoxDroite.setSpacing(20);
+        this.motCrypte.setStyle("-fx-font-size : 30px;");
+        this.leNiveau.setStyle("-fx-font-size : 25px;");
 
-        System.out.println(this.motCrypte);
-        System.out.println(this.modelePendu);
         System.out.println(this.modelePendu.getMotATrouve());
         return pane;
      }
@@ -239,7 +257,6 @@ public class Pendu extends Application {
         modeJeu();
         this.modelePendu.setMotATrouver();
         this.majAffichage();
-        System.out.println(this.modelePendu.getNiveau());
     }
 
     /**
@@ -249,6 +266,11 @@ public class Pendu extends Application {
     public void majAffichage(){
         this.motCrypte.setText(this.modelePendu.getMotCrypte());
         this.dessin.setImage(new Image("file:./pendu_pour_etu/img/pendu"+(10-this.modelePendu.getNbErreursRestants()+".png")));
+
+        double lettreRestante = Integer.valueOf(this.modelePendu.getNbLettresRestantes()).doubleValue();
+        double lettreTotal =Integer.valueOf(this.motCrypte.getText().length()).doubleValue();
+
+        this.pg.setProgress(1-(lettreRestante/lettreTotal));
     }
 
     /**
@@ -256,8 +278,7 @@ public class Pendu extends Application {
      * @return le chronomètre du jeu
      */
     public Chronometre getChrono(){
-        // A implémenter
-        return null; // A enlever
+        return this.chrono;
     }
 
     public Alert popUpPartieEnCours(){
@@ -268,18 +289,19 @@ public class Pendu extends Application {
         
     public Alert popUpReglesDuJeu(){
         // A implementer
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Voici les règles du jeu du pendu !\n\nVous disposez de la totalité des lettres de l'alphabet ainsi que d'un mot à deviner. \n\nÀ chaque fois que vous testez une lettre, soit elle est dans le mot et donc ce dernier se complète, soit elle n'est pas dans le mot et le dessin du pendu se complète. \n\nSi vous trouvez le mot avant que le pendu soit entièrement dessiné, alors vous avez gagné. Dans le cas contraire, c'est la défaite.\n\nSouhaitez-vous tenter votre chance ?", ButtonType.YES, ButtonType.NO);
+        alert.setTitle("Regles du Jeu");
         return alert;
     }
     
     public Alert popUpMessageGagne(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez gagné!\nFélicitation...", ButtonType.CLOSE, ButtonType.NEXT);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez gagné!\nAppuyez sur SUIVANT pour une nouvelle partie ou sur FERMER pour retourner à l'accueil", ButtonType.CLOSE, ButtonType.NEXT);
         alert.setTitle("GG");       
         return alert;
     }
     
     public Alert popUpMessagePerdu(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez perdu!\nDommage...", ButtonType.CLOSE, ButtonType.NEXT);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez perdu!\nAppuyez sur SUIVANT pour une nouvelle partie ou sur FERMER pour retourner à l'accueil", ButtonType.CLOSE, ButtonType.NEXT);
         alert.setTitle("Perdu");
         return alert;
     }

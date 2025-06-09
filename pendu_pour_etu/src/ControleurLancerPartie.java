@@ -37,11 +37,11 @@ public class ControleurLancerPartie implements EventHandler<ActionEvent> {
         if (button.getText().contains("Lancer une partie"))
             // si la réponse est oui
             if (reponse.isPresent() && reponse.get().equals(ButtonType.YES)){
-                System.out.println("Ok !");
+                System.out.println("Nouveau mot:");
                 this.vuePendu.lancePartie();
             }
             else{
-                System.out.println("D'ac !");
+                System.out.println("A la prochaine");
             }  
     }
 }
